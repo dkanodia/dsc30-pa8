@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
- * TODO
+ * Implements a spell checker using hashtable/bloom filter
  *
  * @author Divyansh Kanodia
  * @since May 30, 2024
@@ -19,6 +19,13 @@ public class SpellChecker {
 
     public KeyedSet dictWords;
 
+    /**
+     * This method accepts a Reader object, which will be provided, and scans through it using a
+     * Java Scanner as you’ve done before, reading each word in and adding it to a either a
+     * MyHashTable or MyBloomFilter of words (depending on the value of useHashTable).
+     * @param reader file to be read
+     * @param useHashTable to be decided between bloom filter and hashtable
+     */
     public void readDictionary(Reader reader, boolean useHashTable) {
         if (useHashTable){
             dictWords = new MyHashTable();
@@ -34,6 +41,13 @@ public class SpellChecker {
         sc.close();
     }
 
+    /**
+     * Return a list of Strings whereby changing one letter in the given String you can find a
+     * match.
+     * @param word word to be checked
+     * @return a list of Strings whereby changing one letter in the given String you can find a
+     * match.
+     */
     private LinkedList<String> checkWrongLetter(String word) {
         LinkedList<String> output = new LinkedList<String>();
         for (int i = 0; i < word.length(); i++){
@@ -49,6 +63,11 @@ public class SpellChecker {
         return output;
     }
 
+    /**
+     * Return a list of Strings whereby adding one letter to the given String you can find a match.
+     * @param word word to be checked
+     * @return a list of Strings whereby adding one letter to the given String you can find a match.
+     */
     private LinkedList<String> checkInsertedLetter(String word) {
         LinkedList<String> output = new LinkedList<String>();
         for (int i = 0; i < word.length(); i++)
@@ -65,6 +84,12 @@ public class SpellChecker {
         return output;
     }
 
+    /**
+     * Return a list of Strings whereby deleting one letter in the given String you can find a match.
+     * @param word word to be checked
+     * @return a list of Strings whereby deleting one letter in the given String you can find a
+     * match.
+     */
     private LinkedList<String> checkDeleted(String word) {
         LinkedList<String> output = new LinkedList<String>();
         for (int i = 0; i < word.length(); i++){
@@ -75,6 +100,13 @@ public class SpellChecker {
         return output;
     }
 
+    /**
+     * Return a list of Strings whereby swapping two adjacent letters in the given String you can
+     * find a match.
+     * @param word word to be checked
+     * @return a list of Strings whereby swapping two adjacent letters in the given String you
+     *             can find a match.
+     */
     private LinkedList<String> checkTransposedLetter(String word) {
         LinkedList<String> output = new LinkedList<String>();
         for (int i = 1; i < word.length(); i++){
@@ -89,6 +121,13 @@ public class SpellChecker {
         return output;
     }
 
+    /**
+     * Return a list of Strings whereby inserting a space in the given String you can find a
+     * match with both of the newly generated words.
+     * @param word word to be checked
+     * @return a list of Strings whereby inserting a space in the given String you can find a
+     * match with both of the newly generated words.
+     */
     private LinkedList<String> checkInsertSpace(String word) {
         LinkedList<String> output = new LinkedList<String>();
         for (int i = 0; i < word.length(); i++){
@@ -102,6 +141,13 @@ public class SpellChecker {
         return output;
     }
 
+    /**
+     * Return an array of possible correct words that can be made by making the previous changes
+     * to the provided word.
+     * @param word word to be checked
+     * @return an array of possible correct words that can be made by making the previous
+     * changes to the provided word.
+     */
     private String[] checkWord(String word) {
 
         if (dictWords.lookup(word)){
@@ -125,6 +171,15 @@ public class SpellChecker {
         return checkAdded.toArray(new String[0]);
     }
 
+    /**
+     * Build the dictionary, go through the provided words, find any possible matches if the
+     * provided word is misspelled and print.
+     * @param args The following indices of args correspond with these variables:
+     * args[0]: Either 0 or 1 (0 to indicate that a MyHashTable should be used and 1 for
+     *             MyBloomFilter)
+     * args[1]: The path to the file containing dictionary words
+     * args[2]: The path to the file containing input words to test
+     */
     public static void main(String[] args) {
         // args[0]: 0 if we should use a MyHashTable and 1 for a MyBloomFilter
         // args[1]: path to dict file
