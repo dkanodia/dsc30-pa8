@@ -85,7 +85,8 @@ public class SpellChecker {
     }
 
     /**
-     * Return a list of Strings whereby deleting one letter in the given String you can find a match.
+     * Return a list of Strings whereby deleting one letter in the given String you can find a
+     * match.
      * @param word word to be checked
      * @return a list of Strings whereby deleting one letter in the given String you can find a
      * match.

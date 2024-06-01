@@ -75,7 +75,7 @@ public class MyHashTable implements KeyedSet {
         }
 
         if (loadfactor > 1.0f) {
-            this.stats += String.format("Before rehash # %d : load factor %.2f, %d collision(s). " +
+            this.stats += String.format("Before rehash # %d: load factor %.2f, %d collision(s). " +
                             "\n",
                     this.rehashcount, loadfactor, this.numcollisions);
 

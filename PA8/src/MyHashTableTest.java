@@ -130,7 +130,7 @@ class MyHashTableTest {
         table1.insert("abc");
         table1.insert("abc");
         table1.insert("xyz");
-        assertEquals("Before rehash # 1 : load factor 1.08, 4 collision(s). \n",
+        assertEquals("Before rehash # 1: load factor 1.08, 4 collision(s). \n",
                 table1.getStatsLog());
     }
 
