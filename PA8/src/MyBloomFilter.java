@@ -1,13 +1,13 @@
 /*
- * Name: TODO
- * PID: TODO
+ * Name: Divyansh Kanodia
+ * PID: A17922611
  */
 
 /**
  * TODO
  *
- * @author TODO
- * @since TODO
+ * @author Divyansh Kanodia
+ * @since May 30
  */
 
 public class MyBloomFilter implements KeyedSet {
@@ -32,7 +32,12 @@ public class MyBloomFilter implements KeyedSet {
      *         present
      */
     public boolean insert(String key) {
-        // TODO
+        if (key == null){
+            throw new NullPointerException();
+        }
+        bits[hashFuncA(key)] = true;
+        bits[hashFuncB(key)] = true;
+        bits[hashFuncC(key)] = true;
         return false;
     }
 
@@ -43,8 +48,10 @@ public class MyBloomFilter implements KeyedSet {
      * @return true if the key was found, false if the key was not found
      */
     public boolean lookup(String key) {
-        // TODO
-        return false;
+        if (key == null){
+            throw new NullPointerException();
+        }
+        return bits[hashFuncA(key)] & bits[hashFuncB(key)] & bits[hashFuncC(key)];
     }
 
     /**
@@ -53,9 +60,14 @@ public class MyBloomFilter implements KeyedSet {
      * @return A hashcode for the string
      */
     private int hashFuncA(String value) {
-        // TODO
-        // feel free to copy paste from MyHashTable.java
-        return -1;
+        int hashvalue = 0;
+        for(int i = 0; i < value.length(); i++){
+            int leftShiftedValue  = hashvalue << 5;
+            int rightShiftedValue  = hashvalue >>> 27;
+
+            hashvalue = (leftShiftedValue | rightShiftedValue) ^ value.charAt(i);
+        }
+        return  Math.abs(hashvalue) % DEFAULT_M;
     }
 
     /**
@@ -64,8 +76,12 @@ public class MyBloomFilter implements KeyedSet {
      * @return A hashcode for the string
      */
     private int hashFuncB(String value) {
-        // TODO
-        return -1;
+        int hashval = 0;
+        for(int i = 0; i < value.length(); i++){
+            int letter = value.charAt(i);
+            hashval = (hashval * 27 + letter) % DEFAULT_M;
+        }
+        return hashval;
     }
 
     /**
