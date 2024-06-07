@@ -70,7 +70,7 @@ public class SpellChecker {
      */
     private LinkedList<String> checkInsertedLetter(String word) {
         LinkedList<String> output = new LinkedList<String>();
-        for (int i = 0; i < word.length(); i++)
+        for (int i = 0; i <= word.length(); i++)
         {
             for (char j = 'a'; j <= 'z'; j++)
             {

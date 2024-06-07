@@ -38,7 +38,7 @@ public class MyBloomFilter implements KeyedSet {
         bits[hashFuncA(key)] = true;
         bits[hashFuncB(key)] = true;
         bits[hashFuncC(key)] = true;
-        return false;
+        return true;
     }
 
     /**

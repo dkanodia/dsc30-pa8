@@ -30,7 +30,7 @@ public class CollisionHandling {
      * @return hashtable representation after insertions
      */
     public static int[][] doubleHashingResult(){
-        int[][] output = {{0,0,10,17,0,23,2,0}, {51,31,10,17,38,23,2,44}}; //change
+        int[][] output = {{0,0,10,17,0,23,2,0}, {0,51,38,17,44,23,2,0,0,31,10,0,0,0,0,0}}; //change
         return output;
     }
 
